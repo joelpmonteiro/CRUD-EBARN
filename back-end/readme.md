@@ -1,5 +1,6 @@
 ## instalação
-#####
+
+##### Para instalar as dependencias necessarias do sistema use o comando abaixo
 ```bash
 npm install
 ```
