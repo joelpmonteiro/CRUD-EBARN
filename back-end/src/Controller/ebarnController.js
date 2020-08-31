@@ -13,7 +13,7 @@ function saveImage(baseImage) {
     //path of folder where you want to save the image.
     const localPath = `${uploadPath}/uploads/`;
     console.log(localPath)
-    //Find extension of file
+        //Find extension of file
     const ext = baseImage.substring(baseImage.indexOf("/") + 1, baseImage.indexOf(";base64"));
     const fileType = baseImage.substring("data:".length, baseImage.indexOf("/"));
     //Forming regex to extract base64 data of file.
@@ -158,7 +158,7 @@ module.exports = {
 
             } else {
                 let selectedTractors = await selectTractorsController(nameTractors);
-                if (selectedTractors == 0) {
+                if (selectedTractors == 1) {
 
                     let deleteTractors = await ebarnAdo.deleteTractors(id, nameTractors);
                     if (deleteTractors.length > 0) {
