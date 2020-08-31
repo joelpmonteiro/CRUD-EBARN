@@ -63,6 +63,10 @@ export class AppSelectedTractorsComponent implements OnInit {
         localStorage.setItem('tractors', this.ELEMENT_DATA);
         this.sucessCreate = data.body.msg;
         this.check = true;
+        setInterval(() => {
+
+          this.check = false;
+        }, 3500);
       }
     }, error => {
       if (error.status === 404) {
@@ -119,7 +123,6 @@ export class AppSelectedTractorsComponent implements OnInit {
         localStorage.setItem('tractors', this.ELEMENT_DATA);
         $('#deletarModal').modal('hide');
         setInterval(() => {
-
           this.check = false;
         }, 3500);
       }
