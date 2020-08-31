@@ -1,0 +1,22 @@
+mat-grid-tile {
+    background: lightblue;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 50%;
+}
+
+.example-full-width {
+    width: 50%;
+}
+
+.circle-img {
+    max-width: 200px;
+    width: 75%;
+    margin: 0;
+    display: flex;
+    flex: 1 1 auto;
+    margin-top: 3%;
+}

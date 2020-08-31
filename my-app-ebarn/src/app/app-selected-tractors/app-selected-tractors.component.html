@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-4">
+            <div class="mt-2">
+                <div class="col ml-n4 mx-5 mr-5">
+                    <label style="font-size: 20px;">Deletar Todos os Tratores: </label>
+                </div>
+                <div class="col ml-5 mx-5 mr-5">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#deletarModal">Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-auto">
+        <div class="col mt-1">
+            <div *ngIf="check" class="alert alert-success" tabindex="-1" aria-hidden="true" role="alert">
+                {{sucessCreate}}
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+
+            <div *ngIf="errorHttp" class="alert alert-danger" tabindex="-1" aria-hidden="true" role="alert">
+                {{errorAction}}
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+        </div>
+        <div class="mt-2">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome Trator</th>
+                        <th scope="col">Modelo Trator</th>
+                        <th scope="col">Imagem</th>
+                        <th scope="col">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of ELEMENT_DATA; let i = index">
+                        <th scope="row">{{i}}</th>
+                        <td>{{item.nameTractors}}</td>
+                        <td>{{item.modelTractors}}</td>
+                        <td> <img [src]=item.imgTractors alt="Girl in a jacket" width="50" height="50"></td>
+                        <td>
+                            <!-- <input type="text" hidden="hidden" [(ngModel)]="item.id" [value]="item.id" name="id"> -->
+                            <button type="button" class="btn btn-outline-danger"
+                                (click)="deleteTractors(item)">Excluir</button>
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#alterarModal" (click)="searchTractorForUpdate(item)">Alterar</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+
+        $('#alterarModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+    </script>
+</div>
+<div class="modal fade" id="alterarModal" tabindex="-1" aria-labelledby="alterarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alterarModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="alterForm" (ngSubmit)="updateTractors()">
+                    <div class="form-group" *ngIf="crudUpdateTractor == undefined else loading">
+                        <label for="name" class="col-form-label">Trator nao selecionado
+                        </label>
+                    </div>
+                    <ng-template #loading>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome do Trator:</label>
+                            <input type="text" hidden="hidden" formControlName="id" name="id"
+                                [ngModel]="crudUpdateTractor.id">
+
+                            <input type="text" class="form-control" placeholder="Nome do trator"
+                                formControlName="nameTractors" name="nameTractors"
+                                [ngModel]="crudUpdateTractor.nameTractors">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Modelo do trator:</label>
+                            <input type="text" class="form-control" placeholder="Model do trator"
+                                formControlName="modelTractors" [ngModel]="crudUpdateTractor.modelTractors">
+                        </div>
+                    </ng-template>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="updateTractors()" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deletarModal" tabindex="-1" aria-labelledby="deletarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletarModalLabel">Deletar Todos os Tratores</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Deseja Realmente Deletar Todos os Tratores<span class="badge badge-secondary"></span></h2>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" (click)="deleteAllTractors()" class="btn btn-primary">Sim</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
